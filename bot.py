@@ -22,13 +22,10 @@ async def on_ready():
     members = '\n - '.join([member.name for member in guild.members])
     print(f'Guild Members:\n - {members}')
 
-@bot.event
-async def on_message(message):
-    if message.author == bot.user:
-        return
-    
-    print(message)
-    await message.channel.send("Thanks for the message!")
+@bot.command(name='hello')
+async def hello(context):
+    # context is a Context object
+    await context.send("Howdy!")
 
 # handle errors from on_message()
 @bot.event
