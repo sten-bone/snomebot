@@ -15,7 +15,9 @@ botIntents = discord.Intents.default()
 botIntents.members = True
 
 # client = discord.Client(intents=botIntents)
-bot = commands.Bot(command_prefix="sb ", intents=botIntents)
+bot = commands.Bot(command_prefix = "sb ",
+                   intents = botIntents,
+                   help_command = commands.DefaultHelpCommand(no_category='Commands'))
 
 @bot.event
 async def on_ready():
