@@ -8,6 +8,16 @@ from src.character import Character
 # icons to use for displaying dice
 DICE = [':one:', ':two:', ':three:', ':four:', ':five:', ':six:']
 
+# gets custom dice emojis, or keeps default
+def get_dice(guild):
+    emojis = {e.name:str(e) for e in guild.emojis}
+    if (emojis['dice_1']): DICE[0]= emojis['dice_1']
+    if (emojis['dice_2']): DICE[1]= emojis['dice_2']
+    if (emojis['dice_3']): DICE[2]= emojis['dice_3']
+    if (emojis['dice_4']): DICE[3]= emojis['dice_4']
+    if (emojis['dice_5']): DICE[4]= emojis['dice_5']
+    if (emojis['dice_6']): DICE[5]= emojis['dice_6']
+
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
@@ -35,6 +45,8 @@ async def on_ready():
     guild = discord.utils.get(bot.guilds, name=GUILD)
     
     print(f'{bot.user} has connected to Guild: {guild.name}!')
+    get_dice(guild)
+
     members = '\n - '.join([f'{member.name} ({member.top_role})' for member in guild.members])
     print(f'Guild Members:\n - {members}')
 
