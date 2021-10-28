@@ -1,4 +1,5 @@
 import discord
+import src.item
 
 class Character:
 
@@ -21,6 +22,27 @@ class Character:
         self.reactions = reactions
         
     # returns the character sheet as an embed object
-    def get_sheet(self):
+    def get_sheet(self, dice):
         sheet = discord.Embed(title=self.name, url='')
+        sheet.set_thumbnail(url='')
+        sheet.add_field(name="HP", value=f"{self.hp}/{self.max_hp}", inline=False)
+        sheet.add_field(name="Level", value=self.level, inline=True)
+        sheet.add_field(name="Gold", value=self.gold, inline=True)
+        sheet.add_field(name=f"EXP ({self.exp}/10)", value=":star:" * self.exp, inline=False)
+        sheet.add_field(name="Muscle :crossed_swords:", value=self.muscle, inline=False)
+        sheet.add_field(name="Vision :eye:", value=self.vision, inline=False)
+        sheet.add_field(name="Stealth :boot:", value=self.stealth, inline=False)
+        sheet.add_field(name="Agility :runner:", value=self.agility, inline=False)
+        sheet.add_field(name="Weapon", value=self.weapon, inline=False)
+        sheet.add_field(name="Armor", value=self.armor, inline=False)
+        sheet.add_field(name="Items", value="Use `sb items`", inline=False)
+        sheet.add_field(name="Reckless Reactions", value=self.list_reactions(dice), inline=False)
         return sheet
+    
+    # returns a list of reactions and dice emoji
+    def list_reactions(self, dice):
+        react = []
+        for i in range(len(self.reactions)):
+            r = self.reactions[i]
+            react.append(f"{dice[i]} " + (":flushed:" if r[0] == 'mild' else (":fearful:" if r[0] == 'bad' else ":scream:")) + f" {r[1]}")
+        return '\n'.join(react)

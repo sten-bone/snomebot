@@ -33,7 +33,7 @@ bot = commands.Bot(command_prefix = "sb ",
 
 test_reactions = [('mild', 'Start Crying'), ('bad', 'Zero Gravity'), ('awful', 'Shapeshift'),
                   ('mild', 'Dance'), ('bad', 'Start Glowing'), ('awful', 'Catch on Fire')]
-test_character = Character("Test Character", 1, 10, 10, 15, 0, 1, 1, 1, -1, 
+test_character = Character("Test Character", 1, 10, 10, 15, 3, 1, 1, 1, -1, 
                             "weapon", "armor", "items", test_reactions)
 
 #######################################################################
@@ -81,7 +81,7 @@ def show_die(pips : int):
 @bot.command(name='sheet', help='Display your character\'s sheet.')
 async def sheet(context):
     author = context.message.author
-    await context.send(f"{author.mention}", embed=test_character.get_sheet())
+    await context.send(f"{author.mention}", embed=test_character.get_sheet(DICE))
 
 #######################################################################
 # ERROR HANDLING
