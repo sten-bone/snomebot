@@ -44,5 +44,21 @@ class Character:
         react = []
         for i in range(len(self.reactions)):
             r = self.reactions[i]
-            react.append(f"{dice[i]} " + (":flushed:" if r[0] == 'mild' else (":fearful:" if r[0] == 'bad' else ":scream:")) + f" {r[1]}")
+            react.append(f"{dice[i]} " 
+                + (":flushed:" if r[0] == 'mild' else (":fearful:" if r[0] == 'bad' else ":scream:")) 
+                + f" {r[1]}")
         return '\n'.join(react)
+
+    # gives the character a certain amount of exp
+    def give_exp(self, exp_to_add):
+        self.exp += exp_to_add
+
+    # deals damage to the character, but will not go below 0
+    def deal_damage(self, damage):
+        self.hp -= damage
+        if (self.hp < 0): self.hp = 0
+
+    # heals the character, but will 
+    def heal(self, health):
+        self.hp += health
+        if (self.hp > self.max_hp): self.hp = self.max_hp
